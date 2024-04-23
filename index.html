@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Value Buttons</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .result-message {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      display: none; /* Initially hidden */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="text-center">Choose a Button</h1>
+        <div class="button-group text-center">
+          <button class="btn btn-primary mr-2" onclick="check(1)">1</button>
+          <button class="btn btn-primary mr-2" onclick="check(2)">2</button>
+          <button class="btn btn-primary" onclick="check(3)">3</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    function start() {
+      var randNum = Math.floor(Math.random() * 16);
+      document.getElementById("randNum").innerText = randNum;
+      var randomButton = Math.floor(Math.random() * 3) + 1;
+      document.getElementById("btn1").innerText = randomButton === 1 ? randNum.toString(2) : Math.floor(Math.random() * 16).toString(2);
+      document.getElementById("btn2").innerText = randomButton === 2 ? randNum.toString(2) : Math.floor(Math.random() * 16).toString(2);
+      document.getElementById("btn3").innerText = randomButton === 3 ? randNum.toString(2) : Math.floor(Math.random() * 16).toString(2);
+    }
+
+    function check(num) {
+      var randNum = parseInt(document.getElementById("randNum").innerText, 10);
+      var resultContainer = document.getElementById("result");
+      resultContainer.innerText = num === Math.floor(Math.random() * 3) + 1 ? "CORRECT" : "INCORRECT";
+      resultContainer.style.display = "block";
+      setTimeout(function() {
+        resultContainer.style.display = "none";
+      }, 500);
+      setTimeout(start, 500);
+    }
+
+    start(); // Start the first game
+  </script>
+  <div id="result" class="result-message"></div>
+  <div id="randNum" style="display: none;"></div>
+</body>
+</html>
